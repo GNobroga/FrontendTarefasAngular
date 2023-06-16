@@ -83,7 +83,10 @@ export class HomeComponent  {
   public closeModalAddOrEditTask(): void {
     this.openModalTask = false;
     this.modeEditList = false;
+    this.modeEditTask = false;
+    this.taskSelected = undefined;
     this.updateOnAreaTasks();
+    console.log("Entroua quii")
   }
 
   // Deslogar
@@ -126,6 +129,7 @@ export class HomeComponent  {
   // Atualiazar a lista e a tarefa quando adicionar uma tarefa ou editar.
   public updateOnAreaTasks(): void {
     if (!this.listSelected) {
+      console.log("Entrou aquiii! 132");
       return;
     }
 
@@ -133,12 +137,16 @@ export class HomeComponent  {
     this._usuarioService.findById(this.userId)
       .subscribe({
         next: user => {
-          this.lists = user.listas as [];
+
+          this.lists = [...user.listas as Array<Lista>];
+
+          console.log(this.lists);
 
           const listId: number = this.listSelected?.codigo as number;
 
           this.listSelected = this.lists.find( list => list.codigo === listId);
           this.tasks = this.listSelected?.tarefas as Tarefa[];
+
         },
         error: error => {
           console.log(error);

@@ -33,7 +33,9 @@
         <task-list
           *ngIf="tasks.length"
           [data]="tasks"
+          [listSelected]="listSelected"
           (editTaskEvent)="editTask($event)"
+          (updateAreaTasks)="updateOnAreaTasks()"
         >
         </task-list>
 

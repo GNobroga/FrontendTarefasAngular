@@ -36,53 +36,62 @@ export class ModalTaskComponent implements OnChanges {
 
   public ngOnChanges(): void {
     if (this.taskSelected && this.listSelected) {
-      this.taskSelected.listaId = this.listSelected.codigo as number;
       this.setTask(this.taskSelected);
     }
   }
 
   public close(): void {
+    this.updateAreaTasks.emit();
     this.closeModalEvent.emit();
   }
 
   // Editar a tarefa
   public edit(): void {
-    console.log(this.taskSelected);
-  }
+    const task = this.getTask();
 
-  public save(): void {
-    const titulo: string = this.formGroup.get("titulo")?.value.trim();
-    const descricao: string = this.formGroup.get("descricao")?.value.trim();
-    const dataPrevisao: string = this.formGroup.get("dataPrevisao")?.value.trim();
+    console.log(this.listSelected);
 
-    if (this.canSave(titulo, dataPrevisao) && this.listSelected) {
-      const listaId = this.listSelected.codigo as number;
-
-      this._taskService.create({ titulo, descricao, dataPrevisao, listaId })
+    if (this.canSave(task)) {
+      this._taskService.update(task)
         .subscribe({
           next: value => {
-            console.log("Tarefa", value);
-            this._toastr.success("Tarefa adicionada", "Operação");
+            this._toastr.success("Tarefa editada", "Operação");
             this.close();
-            this.updateAreaTasks.emit();
           },
           error: error => {
-            console.log(error);
-            this._toastr.error("Não foi possível adicionar a tarefa", "Operação");
+            this._toastr.error("Não foi possível editar", "Operação");
           }
-        })
+        });
     }
   }
 
-  private canSave(titulo: string, dataPrevisao: string): boolean {
+  public save(): void {
+    const task = this.getTask();
+
+    if (this.canSave(task)) {
+      this._taskService.create(task)
+        .subscribe({
+          next: value => {
+            this._toastr.success("Tarefa adicionada", "Operação");
+            this.close();
+          },
+          error: error => {
+            this._toastr.error("Não foi possível adicionar a tarefa", "Operação");
+          }
+        });
+
+    }
+  }
+
+  private canSave(task: Tarefa): boolean {
     let can: boolean = true;
 
-    if (titulo === "") {
+    if (task.titulo === "") {
       this._toastr.warning("Preencha o título", "Tarefa");
       can = false;
     }
 
-    const datePrev = new Date(dataPrevisao);
+    const datePrev = new Date(task.dataPrevisao);
     const dateCur = new Date();
 
     datePrev.setUTCHours(0, 0, 0, 0);
@@ -90,7 +99,7 @@ export class ModalTaskComponent implements OnChanges {
     dateCur.setUTCHours(0,0,0,0);
     dateCur.setHours(0,0,0,0);
 
-    if (dataPrevisao === "") {
+    if (task.dataPrevisao === "") {
       this._toastr.warning("Preencha a data de previsão", "Tarefa");
       can = false;
     } else if (datePrev.getTime() < dateCur.getTime()) {
@@ -106,5 +115,23 @@ export class ModalTaskComponent implements OnChanges {
     this.formGroup.get("titulo")?.setValue(task.titulo);
     this.formGroup.get("descricao")?.setValue(task.descricao);
     this.formGroup.get("dataPrevisao")?.setValue(task.dataPrevisao);
+  }
+
+  public getTask(): Tarefa {
+    const titulo: string = this.formGroup.get("titulo")?.value.trim();
+    const descricao: string = this.formGroup.get("descricao")?.value.trim();
+    const dataPrevisao: string = this.formGroup.get("dataPrevisao")?.value.trim();
+
+    if (!this.listSelected) {
+      throw new Error("Lista selecionada não existe");
+    }
+    const listaId = this.listSelected.codigo as number;
+
+    if (this.taskSelected) { // Verificar se a tarefa esta sendo editada
+      const id = this.taskSelected.codigo as number;
+      return { codigo: id, titulo, descricao, dataPrevisao, listaId };
+    }
+
+    return { titulo, descricao, dataPrevisao, listaId };
   }
 }
