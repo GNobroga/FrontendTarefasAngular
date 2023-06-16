@@ -1,0 +1,19 @@
+<div class="cadastro">
+  <form class="cadastro-form fadeIn" #registerForm="ngForm">
+      <h1>Cadastro</h1>
+      <div>
+          <label for="usuario">Usuário</label>
+          <input type="text" name="apelido"  ngModel id="usuario">
+      </div>
+      <div>
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" ngModel id="senha">
+      </div>
+      <div>
+          <label for="senha">Senha confirmação</label>
+          <input type="password" name="confirmacao" ngModel id="confirmacao">
+      </div>
+      <button type="submit" (click)="register(registerForm.value)">Cadastrar</button>
+    </form>
+</div>
+

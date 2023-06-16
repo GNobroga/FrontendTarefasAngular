@@ -1,0 +1,21 @@
+<div class="task-list">
+  <div class="task-list-scroll">
+    <div class="task-list-list">
+      <div class="task-list-item" *ngFor="let task of data">
+        <div class="task-list-item-header">
+          <input type="checkbox" name="active" />
+          <h1>{{ task.titulo }}</h1>
+        </div>
+        <div class="task-list-item-actions">
+          <img src="../../../../assets/icons/task-list/edit.svg" alt="" (click)="editTask(task)"/>
+          <img src="../../../../assets/icons/task-list/remove.svg" alt="" />
+        </div>
+        <div class="task-list-item-descriptions">
+          <p>Criação {{ task.dataCriacao }}</p>
+          <p>Previsão {{ task.dataPrevisao }}</p>
+          <p>Criação 10/04/2000</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
