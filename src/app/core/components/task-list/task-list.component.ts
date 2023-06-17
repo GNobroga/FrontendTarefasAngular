@@ -20,7 +20,9 @@ export class TaskListComponent {
 
   @Input() public data: Tarefa[] = [];
 
-  constructor(private _taskService: TarefaService, private _toastr: ToastrService) {}
+  constructor(private _taskService: TarefaService, private _toastr: ToastrService) {
+
+  }
 
   public editTask(task: Tarefa): void {
     this.editTaskEvent.emit(task);
@@ -57,15 +59,13 @@ export class TaskListComponent {
             status = Status.NOT_DONE;
           }
 
-          this._toastr.success(`A tarefa ${value.codigo} teve seu status mudado para ${status}`, "Tarefa");
+          this._toastr.warning(`Novo status: ${status}`, "Tarefa");
+          this.updateAreaTasks.emit();
         },
         error: error => {
           this._toastr.error(`Nao foi possivel mudar o status da tarefa`, "Tarefa");
         }
       })
-
-
-    console.log(task);
 
   }
 }

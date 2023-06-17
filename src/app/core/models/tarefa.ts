@@ -5,5 +5,8 @@ export interface Tarefa {
   dataCriacao?: string;
   dataPrevisao: string;
   feito?: boolean
+  expirou?: boolean;
   listaId: number;
+  vencimento?: string;
+  conclusao?: string;
 }

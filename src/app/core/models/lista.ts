@@ -6,4 +6,7 @@ export interface Lista {
   dataCriacao?: string;
   usuarioId: number;
   tarefas?: Tarefa[];
+  feitas?: number;
+  naoFeitas?: number;
+  vencidas?: number;
 }

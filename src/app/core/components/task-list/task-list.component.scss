@@ -78,11 +78,41 @@
     }
   }
 
+
+  @mixin task_input_checkbox($bg) {
+    all: unset;
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block;
+    transition: background ease-in-out 1s;
+    background-color: $bg;
+    border-radius: 50%;
+  }
+
   .done {
-    background: linear-gradient(to right, #62B160, #62B160) !important;
+    background: linear-gradient(to bottom, #1d581c, #2a7a2890) !important;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     color: #fff !important;
+
+    input[type=checkbox] {
+      @include task_input_checkbox(#ebefe597);
+    }
+
+    .task-list-item-descriptions p {
+      color: #fff !important;
+    }
+  }
+
+  .expired {
+    background: linear-gradient(to bottom, #a21e1eac, #c9101082) !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #fff !important;
+
+    input[type=checkbox] {
+      @include task_input_checkbox(#ebefe5);
+    }
 
     .task-list-item-descriptions p {
       color: #fff !important;

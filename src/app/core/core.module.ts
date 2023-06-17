@@ -12,6 +12,7 @@ import { ModalListComponent } from './components/modal-list/modal-list.component
 import { LoginComponent } from './components/login/login.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LimitStringPipe } from './pipes/limit-string.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ModalListComponent,
     LoginComponent,
     CadastroComponent,
+    LimitStringPipe,
   ],
   imports: [CommonModule, CoreRoutingModule, FormsModule, ReactiveFormsModule],
   providers: []

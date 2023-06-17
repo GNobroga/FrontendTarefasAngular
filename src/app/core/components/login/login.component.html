@@ -3,11 +3,11 @@
       <h1>Login</h1>
       <div>
           <label for="usuario">Usuário</label>
-          <input type="text" name="apelido"  ngModel id="usuario">
+          <input type="text" name="apelido"  ngModel id="usuario" autocomplete="off">
       </div>
       <div>
           <label for="senha">Senha</label>
-          <input type="password" name="senha" ngModel id="senha">
+          <input type="password" name="senha" ngModel id="senha" autocomplete="off">
       </div>
       <button type="submit" (click)="toEnter(loginForm.value)">Logar</button>
       <div class="login-cadastro">

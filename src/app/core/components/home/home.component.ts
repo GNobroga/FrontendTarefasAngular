@@ -52,6 +52,7 @@ export class HomeComponent  {
       .subscribe({
         next: value => {
           this.lists = value.listas as [];
+          console.log(this.lists)
         },
         error: error => {
           console.log(error)
@@ -152,5 +153,11 @@ export class HomeComponent  {
           console.log(error);
         }
       })
+  }
+
+  // Calculo de quantidade tarefas
+  public totalInforTasks(...args: any[]): number {
+    return args.filter(x => x != null && typeof x === "number")
+      .reduce((x, y) => x + y);
   }
 }

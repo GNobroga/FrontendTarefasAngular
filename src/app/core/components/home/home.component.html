@@ -23,11 +23,11 @@
       </div>
 
       <div class="tasks">
-        <section class="tasks-infor">
-          <p>A fazer: 0</p>
-          <p>Feitas: 0</p>
-          <p>Não feitas: 0</p>
-          <p>Total: 0</p>
+        <section *ngIf="listSelected" class="tasks-infor">
+          <p>A fazer: {{ listSelected.naoFeitas }}</p>
+          <p>Feitas:  {{ listSelected.feitas }}</p>
+          <p>Vencidas: {{ listSelected.vencidas }}</p>
+          <p>Total: {{ totalInforTasks(listSelected.naoFeitas, listSelected.feitas, listSelected.vencidas) }}</p>
         </section>
 
         <task-list

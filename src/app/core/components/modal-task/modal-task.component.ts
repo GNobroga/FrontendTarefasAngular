@@ -102,10 +102,11 @@ export class ModalTaskComponent implements OnChanges {
     if (task.dataPrevisao === "") {
       this._toastr.warning("Preencha a data de previsão", "Tarefa");
       can = false;
-    } else if (datePrev.getTime() < dateCur.getTime()) {
-      this._toastr.warning("A Data da previsão é menor que a data atual", "Tarefa");
-      can = false;
     }
+    // } else if (datePrev.getTime() < dateCur.getTime()) {
+    //   this._toastr.warning("A Data da previsão é menor que a data atual", "Tarefa");
+    //   can = false;
+    // }
 
     return can;
   }
