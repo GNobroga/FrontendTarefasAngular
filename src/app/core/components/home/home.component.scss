@@ -28,6 +28,18 @@
       justify-content: flex-end;
       padding: 1rem;
 
+      .vencidas {
+        color: red;
+      }
+
+      .feitas {
+        color: green;
+      }
+
+      .aFazer {
+        color: goldenrod;
+      }
+
       p {
         font-size: 1.2rem;
         color: #767070;

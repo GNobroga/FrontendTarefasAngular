@@ -24,9 +24,9 @@
 
       <div class="tasks">
         <section *ngIf="listSelected" class="tasks-infor">
-          <p>A fazer: {{ listSelected.naoFeitas }}</p>
-          <p>Feitas:  {{ listSelected.feitas }}</p>
-          <p>Vencidas: {{ listSelected.vencidas }}</p>
+          <p>A fazer: <span class="aFazer">{{ listSelected.naoFeitas }}</span></p>
+          <p>Feitas:  <span class="feitas">{{ listSelected.feitas }}</span></p>
+          <p>Vencidas: <span class="vencidas">{{ listSelected.vencidas }}</span></p>
           <p>Total: {{ totalInforTasks(listSelected.naoFeitas, listSelected.feitas, listSelected.vencidas) }}</p>
         </section>
 

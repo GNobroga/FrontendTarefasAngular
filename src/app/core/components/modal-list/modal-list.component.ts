@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ListaService } from '../../services/lista.service';
 import { Lista } from '../../models/lista';
-import { Tarefa } from '../../models/tarefa';
 
 @Component({
   selector: 'modal-list',
@@ -68,16 +67,24 @@ export class ModalListComponent implements OnChanges {
     if (!this.listSelected || !this.readyToRegisterList()) {
       return;
     }
+    console.log(this.userId)
+
+    if (this.userId) {
+      this.listSelected.usuarioId = this.userId;
+    }
 
     this.listSelected.titulo = this.formGroup.get("titulo")?.value;
 
     this._listaService.update(this.listSelected)
       .subscribe({
         next: value => {
+          this._toastr.success("Título atualizado", "Lista");
           this.close();
         },
         error: error => {
+          this._toastr.error("Não foi possível atualizar o título", "Lista");
           console.log(error);
+          this.close();
         }
       })
 
