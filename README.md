@@ -7,7 +7,3 @@ https://github.com/GNobroga/FrontendTarefasAngular/assets/88632109/ebad7cee-ac31
 ## Tecnologias
 
 - Angular
-
-- Sass
-
-- @auth0/angular-jwt
