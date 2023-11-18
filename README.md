@@ -7,3 +7,5 @@ Projeto Frontend Tarefas para consumir a API Backend Tarefas.
 - Angular
 
 - Sass
+
+- @auth0/angular-jwt
